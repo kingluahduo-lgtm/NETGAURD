@@ -1,0 +1,126 @@
+2026-07-25 09:58:00,675 [INFO] NetGuardApp: Database initialized successfully at C:\Users\DARK-NIGHT\OneDrive\Desktop\manpreet project\captures\netguard.db
+2026-07-25 09:58:33,472 [INFO] NetGuardApp: Database initialized successfully at C:\Users\DARK-NIGHT\OneDrive\Desktop\manpreet project\captures\netguard.db
+2026-07-25 09:58:35,705 [INFO] NetGuardApp: Local browser launched targeting 127.0.0.1:8000
+2026-07-25 09:58:48,394 [INFO] NetGuardApp: Session 'Capture_Simulation Mode_ef54ed9a' (ef54ed9a) created in DB.
+2026-07-25 09:58:48,394 [INFO] NetGuardApp: Starting NetGuard Sniffer in SIMULATION mode.
+2026-07-25 09:58:48,406 [INFO] NetGuardApp: WebSocket client connected for session: ef54ed9a
+2026-07-25 09:59:11,813 [INFO] NetGuardApp: SIMULATOR: Starting mock threat event: ICMP_FLOOD from 8.8.8.8
+2026-07-25 09:59:12,383 [WARNING] NetGuardApp: IDS Alert inserted: ICMP Flood (Ping of Death) - ICMP Echo Request rate exceeds 30 pings/sec.
+2026-07-25 09:59:12,571 [INFO] NetGuardApp: SIMULATOR: Threat event finished. Returning to normal traffic.
+2026-07-25 09:59:33,072 [INFO] NetGuardApp: SIMULATOR: Starting mock threat event: PORT_SCAN from 185.190.140.22
+2026-07-25 09:59:33,488 [INFO] NetGuardApp: Simulation thread finished.
+2026-07-25 09:59:33,488 [INFO] NetGuardApp: Packet capture stopped.
+2026-07-25 09:59:33,506 [INFO] NetGuardApp: WebSocket client disconnected.
+2026-07-25 10:00:26,184 [INFO] NetGuardApp: Session 'Capture_Simulation Mode_7f4a4301' (7f4a4301) created in DB.
+2026-07-25 10:00:26,184 [INFO] NetGuardApp: Starting NetGuard Sniffer in SIMULATION mode.
+2026-07-25 10:00:26,194 [INFO] NetGuardApp: WebSocket client connected for session: 7f4a4301
+2026-07-25 10:00:47,469 [INFO] NetGuardApp: SIMULATOR: Starting mock threat event: MAC_FLOOD from 8.8.8.8
+2026-07-25 10:00:47,742 [WARNING] NetGuardApp: IDS Alert inserted: Broadcast Storm Warning - Broadcast traffic constitutes 40% of network transmissions in the last 10 seconds.
+2026-07-25 10:00:48,294 [INFO] NetGuardApp: SIMULATOR: Threat event finished. Returning to normal traffic.
+2026-07-25 10:00:58,170 [WARNING] NetGuardApp: IDS Alert inserted: Broadcast Storm Warning - Broadcast traffic constitutes 47% of network transmissions in the last 10 seconds.
+2026-07-25 10:01:05,358 [INFO] NetGuardApp: Simulation thread finished.
+2026-07-25 10:01:05,359 [INFO] NetGuardApp: Packet capture stopped.
+2026-07-25 10:01:05,367 [INFO] NetGuardApp: WebSocket client disconnected.
+2026-07-25 10:06:11,157 [INFO] NetGuardApp: Database initialized successfully at C:\Users\DARK-NIGHT\OneDrive\Desktop\manpreet project\captures\netguard.db
+2026-07-25 10:06:13,290 [INFO] NetGuardApp: Local browser launched targeting 127.0.0.1:8000
+2026-07-25 10:06:58,176 [INFO] NetGuardApp: Session 'Capture_Wi-Fi_8d6a4b22' (8d6a4b22) created in DB.
+2026-07-25 10:06:58,176 [WARNING] NetGuardApp: Raw socket creation failed (Sniffing and sending packets is not available at layer 2: winpcap is not installed. You may use conf.L3socket or conf.L3socket6 to access layer 3). Forcing Simulation Mode.
+2026-07-25 10:06:58,176 [INFO] NetGuardApp: Starting NetGuard Sniffer in SIMULATION mode.
+2026-07-25 10:06:58,184 [INFO] NetGuardApp: WebSocket client connected for session: 8d6a4b22
+2026-07-25 10:07:18,384 [INFO] NetGuardApp: SIMULATOR: Starting mock threat event: ARP_SPOOF from 192.168.1.99
+2026-07-25 10:07:20,769 [INFO] NetGuardApp: SIMULATOR: Threat event finished. Returning to normal traffic.
+2026-07-25 10:07:43,313 [INFO] NetGuardApp: SIMULATOR: Starting mock threat event: ARP_SPOOF from 192.168.1.99
+2026-07-25 10:07:45,906 [INFO] NetGuardApp: SIMULATOR: Threat event finished. Returning to normal traffic.
+2026-07-25 10:08:07,290 [INFO] NetGuardApp: SIMULATOR: Starting mock threat event: MAC_FLOOD from 45.33.32.156
+2026-07-25 10:08:07,504 [WARNING] NetGuardApp: IDS Alert inserted: Broadcast Storm Warning - Broadcast traffic constitutes 40% of network transmissions in the last 10 seconds.
+2026-07-25 10:08:08,267 [WARNING] NetGuardApp: IDS Alert inserted: MAC Table Flooding - MAC Address Flooding detected. 51 unique MAC addresses seen on the network in 5 seconds.
+2026-07-25 10:08:08,634 [INFO] NetGuardApp: SIMULATOR: Threat event finished. Returning to normal traffic.
+2026-07-25 10:08:17,688 [WARNING] NetGuardApp: IDS Alert inserted: Broadcast Storm Warning - Broadcast traffic constitutes 71% of network transmissions in the last 10 seconds.
+2026-07-25 10:08:18,612 [INFO] NetGuardApp: Simulation thread finished.
+2026-07-25 10:08:18,612 [INFO] NetGuardApp: Packet capture stopped.
+2026-07-25 10:08:18,637 [INFO] NetGuardApp: WebSocket client disconnected.
+2026-07-25 10:13:14,992 [INFO] NetGuardApp: Database initialized successfully at C:\Users\DARK-NIGHT\OneDrive\Desktop\manpreet project\captures\netguard.db
+2026-07-25 10:13:17,142 [INFO] NetGuardApp: Local browser launched targeting 127.0.0.1:8000
+2026-07-25 10:13:28,755 [INFO] NetGuardApp: Session 'Capture_Wi-Fi_a79a27a4' (a79a27a4) created in DB.
+2026-07-25 10:13:28,755 [WARNING] NetGuardApp: Raw socket creation failed (Sniffing and sending packets is not available at layer 2: winpcap is not installed. You may use conf.L3socket or conf.L3socket6 to access layer 3). Forcing Simulation Mode.
+2026-07-25 10:13:28,756 [INFO] NetGuardApp: Starting NetGuard Sniffer in SIMULATION mode.
+2026-07-25 10:13:28,767 [INFO] NetGuardApp: WebSocket client connected for session: a79a27a4
+2026-07-25 10:13:37,798 [INFO] NetGuardApp: Simulation thread finished.
+2026-07-25 10:13:37,799 [INFO] NetGuardApp: Packet capture stopped.
+2026-07-25 10:13:37,814 [INFO] NetGuardApp: WebSocket client disconnected.
+2026-07-25 10:13:42,697 [INFO] NetGuardApp: Session 'Capture_Wi-Fi_1fc54126' (1fc54126) created in DB.
+2026-07-25 10:13:42,697 [WARNING] NetGuardApp: Raw socket creation failed (Sniffing and sending packets is not available at layer 2: winpcap is not installed. You may use conf.L3socket or conf.L3socket6 to access layer 3). Forcing Simulation Mode.
+2026-07-25 10:13:42,698 [INFO] NetGuardApp: Starting NetGuard Sniffer in SIMULATION mode.
+2026-07-25 10:13:42,705 [INFO] NetGuardApp: WebSocket client connected for session: 1fc54126
+2026-07-25 10:14:04,967 [INFO] NetGuardApp: SIMULATOR: Starting mock threat event: DNS_FLOOD from 142.250.190.46
+2026-07-25 10:14:05,026 [WARNING] NetGuardApp: IDS Alert inserted: Suspicious DNS Request - DNS request resolved a domain containing suspicious keyword: 'botnet'.
+2026-07-25 10:14:06,784 [WARNING] NetGuardApp: IDS Alert inserted: DNS Query Flood - DNS query burst detected. Request rate exceeds 30 queries/sec.
+2026-07-25 10:14:07,392 [INFO] NetGuardApp: Simulation thread finished.
+2026-07-25 10:14:07,392 [INFO] NetGuardApp: Packet capture stopped.
+2026-07-25 10:14:07,408 [INFO] NetGuardApp: WebSocket client disconnected.
+2026-07-25 10:17:51,976 [INFO] NetGuardApp: Database initialized successfully at C:\Users\DARK-NIGHT\OneDrive\Desktop\manpreet project\captures\netguard.db
+2026-07-25 10:17:54,101 [INFO] NetGuardApp: Local browser launched targeting 127.0.0.1:8000
+2026-07-25 10:17:56,448 [WARNING] NetGuardApp: Scapy interface scanning took too long. Using cached/simulation interface.
+2026-07-25 10:18:24,500 [INFO] NetGuardApp: Session 'Capture_Simulation Mode_2b2f4dab' (2b2f4dab) created in DB.
+2026-07-25 10:18:24,501 [INFO] NetGuardApp: Starting NetGuard Sniffer in SIMULATION mode.
+2026-07-25 10:18:24,509 [INFO] NetGuardApp: WebSocket client connected for session: 2b2f4dab
+2026-07-25 10:18:42,588 [INFO] NetGuardApp: Simulation thread finished.
+2026-07-25 10:18:42,590 [INFO] NetGuardApp: Packet capture stopped.
+2026-07-25 10:18:42,604 [INFO] NetGuardApp: WebSocket client disconnected.
+2026-07-25 10:20:30,981 [INFO] NetGuardApp: Database initialized successfully at C:\Users\DARK-NIGHT\OneDrive\Desktop\manpreet project\captures\netguard.db
+2026-07-25 10:20:33,123 [INFO] NetGuardApp: Local browser launched targeting 127.0.0.1:8000
+2026-07-25 10:20:52,683 [INFO] NetGuardApp: Session 'Capture_Wi-Fi_c4ff52bb' (c4ff52bb) created in DB.
+2026-07-25 10:20:52,684 [INFO] NetGuardApp: Starting NetGuard Sniffer on interface: Wi-Fi
+2026-07-25 10:20:52,694 [INFO] NetGuardApp: WebSocket client connected for session: c4ff52bb
+2026-07-25 10:21:33,065 [INFO] NetGuardApp: Packet capture stopped.
+2026-07-25 10:21:33,230 [INFO] NetGuardApp: PCAP written to C:\Users\DARK-NIGHT\OneDrive\Desktop\manpreet project\captures\c4ff52bb.pcap
+2026-07-25 10:21:33,237 [INFO] NetGuardApp: WebSocket client disconnected.
+2026-07-25 10:22:48,905 [INFO] NetGuardApp: Session 'Capture_Wi-Fi_c9c47f1f' (c9c47f1f) created in DB.
+2026-07-25 10:22:48,906 [INFO] NetGuardApp: Starting NetGuard Sniffer on interface: Wi-Fi
+2026-07-25 10:22:48,911 [INFO] NetGuardApp: WebSocket client connected for session: c9c47f1f
+2026-07-25 10:23:56,768 [INFO] NetGuardApp: Packet capture paused.
+2026-07-25 10:27:12,828 [INFO] NetGuardApp: Packet capture resumed.
+2026-07-25 10:27:31,328 [WARNING] NetGuardApp: IDS Alert inserted: Suspicious DNS Request - DNS request resolved a domain containing suspicious keyword: 'botnet'.
+2026-07-25 10:27:32,392 [WARNING] NetGuardApp: IDS Alert inserted: Suspicious DNS Request - DNS request resolved a domain containing suspicious keyword: 'botnet'.
+2026-07-25 10:27:53,537 [WARNING] NetGuardApp: IDS Alert inserted: Suspicious DNS Request - DNS request resolved a domain containing suspicious keyword: 'botnet'.
+2026-07-25 10:27:53,556 [WARNING] NetGuardApp: IDS Alert inserted: Suspicious DNS Request - DNS request resolved a domain containing suspicious keyword: 'botnet'.
+2026-07-25 10:29:32,664 [INFO] NetGuardApp: Session c9c47f1f PDF audit report generated at C:\Users\DARK-NIGHT\OneDrive\Desktop\manpreet project\reports_export\NetGuard_Report_c9c47f1f_1784955572.pdf
+2026-07-25 10:29:51,187 [INFO] NetGuardApp: Packet capture stopped.
+2026-07-25 10:29:52,533 [INFO] NetGuardApp: PCAP written to C:\Users\DARK-NIGHT\OneDrive\Desktop\manpreet project\captures\c9c47f1f.pcap
+2026-07-25 10:29:52,539 [INFO] NetGuardApp: WebSocket client disconnected.
+2026-11-25 17:05:59,038 [INFO] NetGuardApp: Database initialized successfully at C:\Users\LENOVO\Desktop\Net-guard-main\Net-guard-main\captures\netguard.db
+2026-11-25 17:09:27,405 [INFO] NetGuardApp: Database initialized successfully at C:\Users\LENOVO\Desktop\Net-guard-main\Net-guard-main\captures\netguard.db
+2026-11-25 17:14:27,592 [INFO] NetGuardApp: Database initialized successfully at c:\Users\LENOVO\Desktop\Net-guard-main\Net-guard-main\captures\netguard.db
+2026-11-25 17:15:22,675 [INFO] NetGuardApp: Database initialized successfully at C:\Users\LENOVO\Desktop\Net-guard-main\Net-guard-main\captures\netguard.db
+2026-11-25 17:18:39,668 [INFO] NetGuardApp: Database initialized successfully at C:\Users\LENOVO\Desktop\Net-guard-main\Net-guard-main\captures\netguard.db
+2026-11-25 17:18:41,982 [INFO] NetGuardApp: Local browser launched targeting 127.0.0.1:8001
+2026-11-25 17:22:11,935 [INFO] NetGuardApp: Database initialized successfully at C:\Users\LENOVO\Desktop\Net-guard-main\Net-guard-main\captures\netguard.db
+2026-11-25 17:22:14,202 [INFO] NetGuardApp: Local browser launched targeting 127.0.0.1:8001
+2026-11-25 17:22:26,381 [WARNING] NetGuardApp: Scapy interface scanning took too long. Using cached/simulation interface.
+2026-11-25 17:23:00,758 [INFO] NetGuardApp: Session 'Capture_Simulation Mode_9d8ad818' (9d8ad818) created in DB.
+2026-11-25 17:23:00,759 [INFO] NetGuardApp: Starting NetGuard Sniffer in SIMULATION mode.
+2026-11-25 17:23:00,791 [INFO] NetGuardApp: WebSocket client connected for session: 9d8ad818
+2026-11-25 17:23:21,250 [INFO] NetGuardApp: SIMULATOR: Starting mock threat event: DNS_FLOOD from 204.79.197.200
+2026-11-25 17:23:21,412 [WARNING] NetGuardApp: IDS Alert inserted: Suspicious DNS Request - DNS request resolved a domain containing suspicious keyword: 'botnet'.
+2026-11-25 17:23:29,595 [WARNING] NetGuardApp: IDS Alert inserted: DNS Query Flood - DNS query burst detected. Request rate exceeds 30 queries/sec.
+2026-11-25 17:23:30,610 [INFO] NetGuardApp: SIMULATOR: Threat event finished. Returning to normal traffic.
+2026-11-25 17:23:52,743 [INFO] NetGuardApp: SIMULATOR: Starting mock threat event: LARGE_PACKET from 185.190.140.22
+2026-11-25 17:23:54,995 [WARNING] NetGuardApp: IDS Alert inserted: Large Packet Attack / MTU Abuse - Sender transmitting unusually high density of oversized MTU packets (>1500 bytes).
+2026-11-25 17:24:03,746 [INFO] NetGuardApp: SIMULATOR: Threat event finished. Returning to normal traffic.
+2026-11-25 17:24:16,068 [INFO] NetGuardApp: Simulation thread finished.
+2026-11-25 17:24:16,072 [INFO] NetGuardApp: Packet capture stopped.
+2026-11-25 17:24:16,170 [INFO] NetGuardApp: WebSocket client disconnected.
+2026-11-25 17:25:13,481 [INFO] NetGuardApp: Session 'Capture_Simulation Mode_e8ad0ae3' (e8ad0ae3) created in DB.
+2026-11-25 17:25:13,482 [INFO] NetGuardApp: Starting NetGuard Sniffer in SIMULATION mode.
+2026-11-25 17:25:13,563 [INFO] NetGuardApp: WebSocket client connected for session: e8ad0ae3
+2026-11-25 17:25:36,198 [INFO] NetGuardApp: SIMULATOR: Starting mock threat event: SSH_FAIL from 45.33.32.156
+2026-11-25 17:25:36,915 [WARNING] NetGuardApp: IDS Alert inserted: Excessive Failed SSH Connections - Possible SSH Brute Force attempt. 5 connection failures detected in 10 seconds.
+2026-11-25 17:25:47,223 [WARNING] NetGuardApp: IDS Alert inserted: Excessive Failed SSH Connections - Possible SSH Brute Force attempt. 42 connection failures detected in 10 seconds.
+2026-11-25 17:25:55,604 [INFO] NetGuardApp: SIMULATOR: Threat event finished. Returning to normal traffic.
+2026-11-25 17:26:16,784 [INFO] NetGuardApp: SIMULATOR: Starting mock threat event: SSH_FAIL from 34.117.186.192
+2026-11-25 17:26:17,788 [WARNING] NetGuardApp: IDS Alert inserted: Excessive Failed SSH Connections - Possible SSH Brute Force attempt. 5 connection failures detected in 10 seconds.
+2026-11-25 17:26:27,209 [INFO] NetGuardApp: SIMULATOR: Threat event finished. Returning to normal traffic.
+2026-11-25 17:26:51,975 [INFO] NetGuardApp: SIMULATOR: Starting mock threat event: SYN_FLOOD from 45.33.32.156
+2026-11-25 17:26:52,738 [INFO] NetGuardApp: Simulation thread finished.
+2026-11-25 17:26:52,744 [INFO] NetGuardApp: Packet capture stopped.
+2026-11-25 17:26:52,773 [INFO] NetGuardApp: WebSocket client disconnected.

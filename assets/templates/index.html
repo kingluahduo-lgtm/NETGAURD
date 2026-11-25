@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetGuard – Network Threat Analyzer</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <!-- Dashboard behavior and navigation -->
+    <script src="/assets/js/app.js" defer></script>
+</head>
+<body>
+
+    <!-- Notification Toast Anchor -->
+    <div id="toast-container" class="notification-container"></div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <i class="fa-solid fa-shield-halved logo-icon"></i>
+            <div class="logo-text">NET<span>GUARD</span></div>
+        </div>
+        <ul class="sidebar-menu">
+            <li class="sidebar-item active" data-target="panel-dashboard">
+                <a href="#" class="sidebar-link"><i class="fa-solid fa-chart-line"></i>Dashboard</a>
+            </li>
+            <li class="sidebar-item" data-target="panel-capture">
+                <a href="#" class="sidebar-link"><i class="fa-solid fa-network-wired"></i>Live Capture</a>
+            </li>
+            <li class="sidebar-item" data-target="panel-analyzer">
+                <a href="#" class="sidebar-link"><i class="fa-solid fa-magnifying-glass"></i>Packet Analyzer</a>
+            </li>
+            <li class="sidebar-item" data-target="panel-threats">
+                <a href="#" class="sidebar-link"><i class="fa-solid fa-triangle-exclamation"></i>Threat Detection</a>
+            </li>
+            <li class="sidebar-item" data-target="panel-stats">
+                <a href="#" class="sidebar-link"><i class="fa-solid fa-chart-bar"></i>Statistics</a>
+            </li>
+            <li class="sidebar-item" data-target="panel-reports">
+                <a href="#" class="sidebar-link"><i class="fa-solid fa-file-invoice"></i>Reports</a>
+            </li>
+            <li class="sidebar-item" data-target="panel-settings">
+                <a href="#" class="sidebar-link"><i class="fa-solid fa-sliders"></i>Settings</a>
+            </li>
+            <li class="sidebar-item" data-target="panel-about">
+                <a href="#" class="sidebar-link"><i class="fa-solid fa-circle-info"></i>About</a>
+            </li>
+        </ul>
+        <div class="sidebar-footer">
+            <p>NetGuard Engine v1.0.0</p>
+            <p>&copy; 2026 Portfolio Project</p>
+        </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main class="main-content">
+        
+        <!-- Header status bar -->
+        <header class="header-bar">
+            <div class="header-title" id="current-panel-title">Operations Dashboard</div>
+            <div class="header-actions">
+                <div class="status-indicator" id="sniffer-status-indicator">
+                    <span class="status-dot"></span>
+                    <span id="sniffer-status-text">Sniffer Idle</span>
+                </div>
+                <button class="btn btn-secondary" id="theme-toggle-btn">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- PANEL 1: DASHBOARD -->
+        <section id="panel-dashboard" class="view-panel active">
+            <!-- Metric summary cards -->
+            <div class="grid-container grid-cols-4">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Total Packets</span>
+                        <i class="fa-solid fa-box card-icon"></i>
+                    </div>
+                    <div class="metric-value" id="card-total-packets">0</div>
+                    <div class="metric-trend">Captured in current session</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Packet Rate</span>
+                        <i class="fa-solid fa-gauge-high card-icon"></i>
+                    </div>
+                    <div class="metric-value" id="card-packet-rate">0.0/s</div>
+                    <div class="metric-trend">Average throughput rate</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Threat Alerts</span>
+                        <i class="fa-solid fa-triangle-exclamation card-icon"></i>
+                    </div>
+                    <div class="metric-value text-red" id="card-threat-alerts" style="color: var(--sev-critical);">0</div>
+                    <div class="metric-trend">Intrusions detected by IDS</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Active Devices</span>
+                        <i class="fa-solid fa-computer card-icon"></i>
+                    </div>
+                    <div class="metric-value" id="card-active-devices">0</div>
+                    <div class="metric-trend">Unique IP addresses seen</div>
+                </div>
+            </div>
+
+            <!-- Double columns charts & logs -->
+            <div class="grid-container grid-cols-2" style="margin-bottom: 20px;">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Live Network Traffic (5s Windows)</span>
+                        <i class="fa-solid fa-chart-line card-icon"></i>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="liveTrafficChart"></canvas>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Protocol Distribution</span>
+                        <i class="fa-solid fa-chart-pie card-icon"></i>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="protocolPieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-container grid-cols-3">
+                <!-- Top talkers list -->
+                <div class="card" style="grid-column: span 1;">
+                    <div class="card-header">
+                        <span class="card-title">Top Source IPs</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square card-icon"></i>
+                    </div>
+                    <div class="table-container" style="max-height: 200px;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>IP Address</th>
+                                    <th>Packets</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dashboard-top-sources">
+                                <tr><td colspan="2" style="text-align: center;">No active traffic data</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Latest threat warning lists -->
+                <div class="card" style="grid-column: span 2;">
+                    <div class="card-header">
+                        <span class="card-title">Real-Time Threat Notifications Panel</span>
+                        <i class="fa-solid fa-bell card-icon"></i>
+                    </div>
+                    <div class="table-container" style="max-height: 200px;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Threat Event</th>
+                                    <th>Severity</th>
+                                    <th>Source IP</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dashboard-recent-alerts">
+                                <tr><td colspan="4" style="text-align: center;">No threats detected</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANEL 2: LIVE CAPTURE -->
+        <section id="panel-capture" class="view-panel">
+            <!-- Connection Sniffer interface controls -->
+            <div class="control-bar">
+                <div class="control-group">
+                    <label for="capture-interface-select">Interface:</label>
+                    <select id="capture-interface-select" style="min-width: 240px;">
+                        <option value="Simulation Mode">Simulation Mode (Fallback)</option>
+                    </select>
+                    <button class="btn btn-secondary" id="interface-refresh-btn"><i class="fa-solid fa-arrows-rotate"></i> Scan</button>
+                </div>
+                <div class="control-group">
+                    <button class="btn btn-primary" id="capture-start-btn"><i class="fa-solid fa-play"></i> Start</button>
+                    <button class="btn btn-secondary" id="capture-pause-btn" disabled><i class="fa-solid fa-pause"></i> Pause</button>
+                    <button class="btn btn-danger" id="capture-stop-btn" disabled><i class="fa-solid fa-stop"></i> Stop</button>
+                </div>
+                <div class="control-group">
+                    <button class="btn btn-secondary" id="capture-clear-btn"><i class="fa-solid fa-trash-can"></i> Clear Table</button>
+                </div>
+            </div>
+
+            <!-- Live Streaming packets list table -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Captured Packets Stream</span>
+                    <i class="fa-solid fa-list-check card-icon"></i>
+                </div>
+                <div class="table-container" style="max-height: 480px;">
+                    <table id="capture-packets-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Timestamp</th>
+                                <th>Source IP</th>
+                                <th>Destination IP</th>
+                                <th>Protocol</th>
+                                <th>Size (B)</th>
+                                <th>Summary</th>
+                            </tr>
+                        </thead>
+                        <tbody id="capture-packets-tbody">
+                            <tr><td colspan="7" style="text-align: center;">Sniffer is idle. Select interface and click Start.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANEL 3: PACKET ANALYZER -->
+        <section id="panel-analyzer" class="view-panel">
+            <!-- Filter toolbar -->
+            <div class="control-bar">
+                <div class="control-group">
+                    <label for="filter-proto">Protocol:</label>
+                    <select id="filter-proto">
+                        <option value="">All</option>
+                        <option value="TCP">TCP</option>
+                        <option value="UDP">UDP</option>
+                        <option value="ICMP">ICMP</option>
+                        <option value="ARP">ARP</option>
+                        <option value="DNS">DNS</option>
+                        <option value="HTTP">HTTP</option>
+                        <option value="HTTPS">HTTPS</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="filter-ip">IP Address:</label>
+                    <input type="text" id="filter-ip" placeholder="192.168.1.1">
+                </div>
+                <div class="control-group">
+                    <label for="filter-port">Port:</label>
+                    <input type="text" id="filter-port" placeholder="80" style="width: 70px;">
+                </div>
+                <div class="control-group">
+                    <label for="filter-search">Keyword:</label>
+                    <input type="text" id="filter-search" placeholder="e.g. google.com">
+                </div>
+                <div class="control-group">
+                    <button class="btn btn-primary" id="analyzer-filter-btn"><i class="fa-solid fa-filter"></i> Apply Filters</button>
+                    <button class="btn btn-secondary" id="analyzer-reset-btn"><i class="fa-solid fa-undo"></i> Reset</button>
+                </div>
+            </div>
+
+            <!-- Multi splitter parser view -->
+            <div class="analyzer-split">
+                <!-- Left half: Packet Table List -->
+                <div class="card analyzer-left">
+                    <div class="card-header">
+                        <span class="card-title">Filter / Search Results</span>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Time</th>
+                                    <th>Source</th>
+                                    <th>Destination</th>
+                                    <th>Proto</th>
+                                    <th>Size</th>
+                                </tr>
+                            </thead>
+                            <tbody id="analyzer-packets-tbody">
+                                <tr><td colspan="6" style="text-align: center;">No packets in current session. Start a capture session first.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Right half: Detailed Headers / Hex / ASCII dump -->
+                <div class="analyzer-right">
+                    <div class="card" style="flex: 2;">
+                        <div class="card-header">
+                            <span class="card-title">Header Details Mapping</span>
+                            <i class="fa-solid fa-sitemap card-icon"></i>
+                        </div>
+                        <div style="overflow-y: auto; height: 180px;">
+                            <div class="kv-grid" id="analyzer-details-grid">
+                                <div class="kv-key">Packet ID:</div><div class="kv-value">-</div>
+                                <div class="kv-key">Timestamp:</div><div class="kv-value">-</div>
+                                <div class="kv-key">Source MAC:</div><div class="kv-value">-</div>
+                                <div class="kv-key">Dest MAC:</div><div class="kv-value">-</div>
+                                <div class="kv-key">Source IP:</div><div class="kv-value">-</div>
+                                <div class="kv-key">Dest IP:</div><div class="kv-value">-</div>
+                                <div class="kv-key">Port (Src/Dst):</div><div class="kv-value">-</div>
+                                <div class="kv-key">TTL / Flags:</div><div class="kv-value">-</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card" style="flex: 3; display: flex; flex-direction: column;">
+                        <div class="card-header" style="margin-bottom: 8px;">
+                            <span class="card-title">Hex & ASCII Payload Dump</span>
+                            <i class="fa-solid fa-code card-icon"></i>
+                        </div>
+                        <div class="code-dump" id="analyzer-hexdump-code">No payload decoded or packet selected.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANEL 4: THREAT DETECTION -->
+        <section id="panel-threats" class="view-panel">
+            <div class="control-bar">
+                <div class="control-group">
+                    <label>IDS Engine Status:</label>
+                    <span style="color: var(--accent-green); font-weight: 700;"><i class="fa-solid fa-circle-check"></i> Monitoring Real-time Security Vectors</span>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Active Security Alarms Dashboard</span>
+                    <i class="fa-solid fa-skull-crossbones card-icon"></i>
+                </div>
+                <div class="table-container" style="max-height: 480px;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Timestamp</th>
+                                <th>Threat Vector Class</th>
+                                <th>Severity</th>
+                                <th>Attacker Source IP</th>
+                                <th>Attack Summary/Details</th>
+                            </tr>
+                        </thead>
+                        <tbody id="threats-table-tbody">
+                            <tr><td colspan="6" style="text-align: center;">No malicious vectors detected by NetGuard IDS.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANEL 5: STATISTICS -->
+        <section id="panel-stats" class="view-panel">
+            <div class="grid-container grid-cols-2" style="margin-bottom: 25px;">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Top 10 Destination IP Addresses</span>
+                        <i class="fa-solid fa-arrow-down-left-and-arrow-up-right-to-center card-icon"></i>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="topDestIPsChart"></canvas>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Bandwidth Consumption Timeline</span>
+                        <i class="fa-solid fa-chart-area card-icon"></i>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="bandwidthChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-container grid-cols-3">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Average Packet Size (Bytes)</span>
+                        <i class="fa-solid fa-weight-hanging card-icon"></i>
+                    </div>
+                    <div class="metric-value" id="stats-avg-size">0 B</div>
+                    <div class="metric-trend">MTU Frame density index</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Duration of Capture</span>
+                        <i class="fa-solid fa-clock card-icon"></i>
+                    </div>
+                    <div class="metric-value" id="stats-duration">0s</div>
+                    <div class="metric-trend">Active sniffer uptime</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Bandwidth Data Volume</span>
+                        <i class="fa-solid fa-database card-icon"></i>
+                    </div>
+                    <div class="metric-value" id="stats-total-bytes">0 KB</div>
+                    <div class="metric-trend">Cumulative bandwidth volume</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANEL 6: REPORTS -->
+        <section id="panel-reports" class="view-panel">
+            <div class="grid-container grid-cols-2">
+                <!-- Session list card -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Stored Database Sessions</span>
+                        <i class="fa-solid fa-network-wired card-icon"></i>
+                    </div>
+                    <div class="table-container" style="max-height: 380px;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Session ID</th>
+                                    <th>Name</th>
+                                    <th>Date</th>
+                                    <th>Packets</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reports-sessions-tbody">
+                                <tr><td colspan="5" style="text-align: center;">No stored database capture records found.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Forensic PDF builder card -->
+                <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <div class="card-header">
+                            <span class="card-title">Export Forensic Audit Reports</span>
+                            <i class="fa-solid fa-file-shield card-icon"></i>
+                        </div>
+                        <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6;">
+                            Compile captured packets, metadata tables, security alerts, and system architecture recommendations into multi-format reports.
+                        </p>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px;">
+                            <div>
+                                <label for="report-session-select" style="display: block; margin-bottom: 5px;">Target Capture Session:</label>
+                                <select id="report-session-select" style="width: 100%;">
+                                    <option value="">-- Select Capture Session --</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn btn-primary" id="export-pdf-btn" style="flex: 1;"><i class="fa-solid fa-file-pdf"></i> Generate PDF Audit</button>
+                        <button class="btn btn-secondary" id="export-csv-btn" style="flex: 1;"><i class="fa-solid fa-file-csv"></i> Save CSV</button>
+                        <button class="btn btn-secondary" id="export-json-btn" style="flex: 1;"><i class="fa-solid fa-file-code"></i> Save JSON</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Session loading / uploading PCAP -->
+            <div class="card" style="margin-top: 25px;">
+                <div class="card-header">
+                    <span class="card-title">Import PCAP Traffic Files</span>
+                    <i class="fa-solid fa-file-import card-icon"></i>
+                </div>
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <p style="font-size: 13px; color: var(--text-secondary); flex-grow: 1;">
+                        Import historical Wireshark/Scapy `.pcap` or `.pcapng` files to parse headers and execute IDS threat detection engines offline.
+                    </p>
+                    <input type="file" id="pcap-file-input" accept=".pcap,.pcapng" style="display: none;">
+                    <button class="btn btn-secondary" onclick="document.getElementById('pcap-file-input').click()"><i class="fa-solid fa-folder-open"></i> Choose PCAP</button>
+                    <button class="btn btn-primary" id="pcap-upload-btn" disabled><i class="fa-solid fa-upload"></i> Process File</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANEL 7: SETTINGS -->
+        <section id="panel-settings" class="view-panel">
+            <div class="card" style="max-width: 600px; margin: 0 auto;">
+                <div class="card-header">
+                    <span class="card-title">Threat Detection Rule Coefficients</span>
+                    <i class="fa-solid fa-gears card-icon"></i>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <label style="display: block; font-weight: 600;">Port Scan Trigger Limit</label>
+                            <span style="font-size: 12px; color: var(--text-muted);">Unique port requests within 5s window</span>
+                        </div>
+                        <input type="number" id="settings-portscan-threshold" value="15" style="width: 80px; text-align: center;">
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <label style="display: block; font-weight: 600;">SYN Flood Limit</label>
+                            <span style="font-size: 12px; color: var(--text-muted);">SYN packets per second from individual IP</span>
+                        </div>
+                        <input type="number" id="settings-synflood-threshold" value="50" style="width: 80px; text-align: center;">
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <label style="display: block; font-weight: 600;">Auditory Intrusion Alarms</label>
+                            <span style="font-size: 12px; color: var(--text-muted);">Play alert sounds when Critical/High alerts trigger</span>
+                        </div>
+                        <input type="checkbox" id="settings-sound-alert" checked style="width: 20px; height: 20px; cursor: pointer;">
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <label style="display: block; font-weight: 600;">Auto-Save Capture Sessions</label>
+                            <span style="font-size: 12px; color: var(--text-muted);">Automatically save packets to DB on shutdown</span>
+                        </div>
+                        <input type="checkbox" id="settings-autosave" checked style="width: 20px; height: 20px; cursor: pointer;">
+                    </div>
+
+                    <button class="btn btn-primary" id="settings-save-btn" style="margin-top: 10px;"><i class="fa-solid fa-circle-check"></i> Save Settings</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANEL 8: ABOUT -->
+        <section id="panel-about" class="view-panel">
+            <div class="card" style="max-width: 800px; margin: 0 auto; text-align: center; padding: 40px;">
+                <i class="fa-solid fa-shield-halved" style="font-size: 72px; color: var(--accent-cyan); margin-bottom: 20px; filter: drop-shadow(0 0 15px rgba(0, 240, 255, 0.45));"></i>
+                <h1 style="font-family: var(--font-cyber); font-size: 28px; margin-bottom: 10px;">NETGUARD v1.0.0</h1>
+                <h3 style="color: var(--accent-cyan); font-weight: 500; font-size: 16px; margin-bottom: 25px;">Intelligent Packet Sniffer & Network Threat Analyzer</h3>
+                
+                <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.8; text-align: left; margin-bottom: 25px;">
+                    NetGuard is an industry-grade Network Monitoring application designed for network administrators, SOC analysts, and security engineers. 
+                    It leverages Scapy and PyShark to monitor raw layers, classify application protocols, verify checksum signatures, and execute a dynamic 
+                    Stateful Intrusion Detection System (IDS). Featuring real-time dashboard visualization and forensic reporting engines, NetGuard serves as a modular platform for security analysis.
+                </p>
+                
+                <div style="display: flex; justify-content: center; gap: 30px; border-top: 1px solid var(--border-color); padding-top: 25px;">
+                    <div style="text-align: left;">
+                        <h4 style="font-family: var(--font-cyber); font-size: 13px; color: var(--accent-cyan); margin-bottom: 8px;">Key Capabilities</h4>
+                        <ul style="list-style: inside square; font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
+                            <li>Live promiscuous-mode packet capturing</li>
+                            <li>Stateful threat warning correlation (IDS)</li>
+                            <li>ReportLab-compiled PDF Security Reports</li>
+                            <li>GeoIP lookup coordinates resolver</li>
+                        </ul>
+                    </div>
+                    <div style="text-align: left;">
+                        <h4 style="font-family: var(--font-cyber); font-size: 13px; color: var(--accent-cyan); margin-bottom: 8px;">Technology Stack</h4>
+                        <ul style="list-style: inside square; font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
+                            <li>FastAPI & WebSockets</li>
+                            <li>SQLite & Pandas</li>
+                            <li>Scapy Engine Wrapper</li>
+                            <li>Chart.js Render Engine</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+2026-07-25 09:59:12,375 | WARNING | ICMP Flood (Ping of Death) | Severity: Medium | Source IP: 8.8.8.8 | Details: ICMP Echo Request rate exceeds 30 pings/sec.
+2026-07-25 10:00:47,734 | WARNING | Broadcast Storm Warning | Severity: Medium | Source IP: 0.0.0.0 | Details: Broadcast traffic constitutes 40% of network transmissions in the last 10 seconds.
+2026-07-25 10:00:58,155 | WARNING | Broadcast Storm Warning | Severity: Medium | Source IP: 192.168.1.108 | Details: Broadcast traffic constitutes 47% of network transmissions in the last 10 seconds.
+2026-07-25 10:08:07,494 | WARNING | Broadcast Storm Warning | Severity: Medium | Source IP: 0.0.0.0 | Details: Broadcast traffic constitutes 40% of network transmissions in the last 10 seconds.
+2026-07-25 10:08:08,258 | WARNING | MAC Table Flooding | Severity: High | Source IP: 0.0.0.0 | Details: MAC Address Flooding detected. 51 unique MAC addresses seen on the network in 5 seconds.
+2026-07-25 10:08:17,677 | WARNING | Broadcast Storm Warning | Severity: Medium | Source IP: 192.168.1.20 | Details: Broadcast traffic constitutes 71% of network transmissions in the last 10 seconds.
+2026-07-25 10:14:05,018 | WARNING | Suspicious DNS Request | Severity: Medium | Source IP: 142.250.190.46 | Details: DNS request resolved a domain containing suspicious keyword: 'botnet'.
+2026-07-25 10:14:06,779 | WARNING | DNS Query Flood | Severity: Medium | Source IP: 142.250.190.46 | Details: DNS query burst detected. Request rate exceeds 30 queries/sec.
+2026-07-25 10:27:31,323 | WARNING | Suspicious DNS Request | Severity: Medium | Source IP: 192.168.31.5 | Details: DNS request resolved a domain containing suspicious keyword: 'botnet'.
+2026-07-25 10:27:32,385 | WARNING | Suspicious DNS Request | Severity: Medium | Source IP: 192.168.31.1 | Details: DNS request resolved a domain containing suspicious keyword: 'botnet'.
+2026-07-25 10:27:53,531 | WARNING | Suspicious DNS Request | Severity: Medium | Source IP: 192.168.31.5 | Details: DNS request resolved a domain containing suspicious keyword: 'botnet'.
+2026-07-25 10:27:53,550 | WARNING | Suspicious DNS Request | Severity: Medium | Source IP: 192.168.31.1 | Details: DNS request resolved a domain containing suspicious keyword: 'botnet'.
+2026-11-25 17:23:21,338 | WARNING | Suspicious DNS Request | Severity: Medium | Source IP: 204.79.197.200 | Details: DNS request resolved a domain containing suspicious keyword: 'botnet'.
+2026-11-25 17:23:29,542 | WARNING | DNS Query Flood | Severity: Medium | Source IP: 204.79.197.200 | Details: DNS query burst detected. Request rate exceeds 30 queries/sec.
+2026-11-25 17:23:54,967 | WARNING | Large Packet Attack / MTU Abuse | Severity: Low | Source IP: 185.190.140.22 | Details: Sender transmitting unusually high density of oversized MTU packets (>1500 bytes).
+2026-11-25 17:25:36,868 | WARNING | Excessive Failed SSH Connections | Severity: High | Source IP: 45.33.32.156 | Details: Possible SSH Brute Force attempt. 5 connection failures detected in 10 seconds.
+2026-11-25 17:25:47,064 | WARNING | Excessive Failed SSH Connections | Severity: High | Source IP: 45.33.32.156 | Details: Possible SSH Brute Force attempt. 42 connection failures detected in 10 seconds.
+2026-11-25 17:26:17,656 | WARNING | Excessive Failed SSH Connections | Severity: High | Source IP: 34.117.186.192 | Details: Possible SSH Brute Force attempt. 5 connection failures detected in 10 seconds.
